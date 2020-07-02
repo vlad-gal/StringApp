@@ -1,5 +1,6 @@
 package by.halatsevich.string.service.impl;
 
+import by.halatsevich.string.exception.InputDataException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -27,42 +28,70 @@ public class ArrayReplaceSymbolServiceImplTest {
     }
 
     @Test
-    public void testReplaceLetterByIndexSuccess() {
+    public void testReplaceLetterByIndexSuccess() throws InputDataException {
         String actual = replaceSymbolService.replaceLetterByIndex(text, 4, 'Ё');
         assertEquals(actual, expectedTextForReplaceLetterByIndex);
     }
 
     @Test
-    public void testReplaceLetterByIndexFailure() {
+    public void testReplaceLetterByIndexFailure() throws InputDataException {
         String actual = replaceSymbolService.replaceLetterByIndex(text, 4, 'Ё');
         String expected = "В половине столетия кое-где по дворЁм села Хабаровки бегала";
         assertNotEquals(actual, expected);
     }
 
+    @Test(expectedExceptions = InputDataException.class,
+            expectedExceptionsMessageRegExp = "Text is null or index is less than 0")
+    public void testReplaceLetterByIndexNullTextExceptionMessage() throws InputDataException {
+        replaceSymbolService.replaceLetterByIndex(null, 4, 'Ё');
+    }
+
+    @Test(expectedExceptions = InputDataException.class,
+            expectedExceptionsMessageRegExp = "Text is null or index is less than 0")
+    public void testReplaceLetterByIndexInvalidIndexExceptionMessage() throws InputDataException {
+        replaceSymbolService.replaceLetterByIndex(text, -4, 'Ё');
+    }
+
     @Test
-    public void testReplaceWrongLetterSuccess() {
+    public void testReplaceWrongLetterSuccess() throws InputDataException {
         String actual = replaceSymbolService.replaceWrongLetter(text, 'п', 'о', 'О');
         assertEquals(actual, expectedTextForReplaceWrongLetter);
     }
 
     @Test
-    public void testReplaceWrongLetterFailure() {
+    public void testReplaceWrongLetterFailure() throws InputDataException {
         String actual = replaceSymbolService.replaceWrongLetter(text, 'п', 'о', 'О');
         String expected = "";
         assertNotEquals(actual, expected);
     }
 
+    @Test(expectedExceptions = InputDataException.class, expectedExceptionsMessageRegExp = "Text is null")
+    public void testReplaceWrongLetterNullTextExceptionMessage() throws InputDataException {
+        replaceSymbolService.replaceWrongLetter(null, 'п', 'о', 'О');
+    }
+
     @Test
-    public void testReplaceSubstringSuccess() {
+    public void testReplaceSubstringSuccess() throws InputDataException {
         String actual = replaceSymbolService.replaceSubstring(text, 6, "HELLO");
         assertEquals(actual, expectedTextForReplaceSubstring);
     }
 
     @Test
-    public void testReplaceSubstringFailure() {
+    public void testReplaceSubstringFailure() throws InputDataException {
         String actual = replaceSymbolService.replaceSubstring(text, 6, "HELLO");
         String expected = "";
         assertNotEquals(actual, expected);
     }
 
+    @Test(expectedExceptions = InputDataException.class,
+            expectedExceptionsMessageRegExp = "Text is null or length of word is less than 0")
+    public void testReplaceSubstringNullTextExceptionMessage() throws InputDataException {
+        replaceSymbolService.replaceSubstring(null, 6, "HELLO");
+    }
+
+    @Test(expectedExceptions = InputDataException.class,
+            expectedExceptionsMessageRegExp = "Text is null or length of word is less than 0")
+    public void testReplaceSubstringWordLengthExceptionMessage() throws InputDataException {
+        replaceSymbolService.replaceSubstring(text, -6, "HELLO");
+    }
 }

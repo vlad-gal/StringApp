@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class TextReaderTest {
     TextReader reader;
@@ -18,42 +19,30 @@ public class TextReaderTest {
     }
 
     @Test
-    public void testReadStringFromFileSuccess() {
-        try {
-            String actual = reader.readStringFromFile(TEST_FILE);
-            String expected = "В половине прошлого столетия по дворам села Хабаровки бегала в затрапезном платье " +
-                    "босоногая, но веселая, толстая и краснощекая девка Наташка. По заслугам и просьбе отца ее, " +
-                    "кларнетиста Саввы, дед мой взял ее в верх - находиться в числе женской прислуги бабушки. " +
-                    "Горничная Наташка отличалась в этой должности кротостью нрава и усердием. ";
-            assertEquals(actual, expected);
-        } catch (InputDataException e) {
-            fail("Something goes wrong");
-        }
+    public void testReadStringFromFileSuccess() throws InputDataException {
+        String actual = reader.readStringFromFile(TEST_FILE);
+        String expected = "В половине прошлого столетия по дворам села Хабаровки бегала в затрапезном платье " +
+                "босоногая, но веселая, толстая и краснощекая девка Наташка. По заслугам и просьбе отца ее, " +
+                "кларнетиста Саввы, дед мой взял ее в верх - находиться в числе женской прислуги бабушки. " +
+                "Горничная Наташка отличалась в этой должности кротостью нрава и усердием. ";
+        assertEquals(actual, expected);
     }
 
     @Test
-    public void testReadStringFromFileFailure() {
-        try {
-            String actual = reader.readStringFromFile(TEST_FILE);
-            String expected = "";
-            assertNotEquals(actual, expected);
-        } catch (InputDataException e) {
-            fail("Something goes wrong");
-        }
+    public void testReadStringFromFileFailure() throws InputDataException {
+        String actual = reader.readStringFromFile(TEST_FILE);
+        String expected = "";
+        assertNotEquals(actual, expected);
     }
 
     @Test
-    public void testReadStringFromDefaultFile() {
-        try {
-            String actual = reader.readStringFromFile("1");
-            String expected = "В половине прошлого столетия по дворам села Хабаровки бегала в затрапезном платье " +
-                    "босоногая, но веселая, толстая и краснощекая девка Наташка. По заслугам и просьбе отца ее, " +
-                    "кларнетиста Саввы, дед мой взял ее в верх - находиться в числе женской прислуги бабушки. " +
-                    "Горничная Наташка отличалась в этой должности кротостью нрава и усердием. ";
-            assertEquals(actual, expected);
-        } catch (InputDataException e) {
-            fail("Something goes wrong");
-        }
+    public void testReadStringFromDefaultFile() throws InputDataException {
+        String actual = reader.readStringFromFile("1");
+        String expected = "В половине прошлого столетия по дворам села Хабаровки бегала в затрапезном платье " +
+                "босоногая, но веселая, толстая и краснощекая девка Наташка. По заслугам и просьбе отца ее, " +
+                "кларнетиста Саввы, дед мой взял ее в верх - находиться в числе женской прислуги бабушки. " +
+                "Горничная Наташка отличалась в этой должности кротостью нрава и усердием. ";
+        assertEquals(actual, expected);
     }
 
     @Test

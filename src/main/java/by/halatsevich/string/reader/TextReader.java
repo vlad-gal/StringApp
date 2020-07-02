@@ -58,6 +58,7 @@ public class TextReader {
         }
         Scanner scanner = new Scanner(input);
         StringBuilder resultText = new StringBuilder();
+        System.out.println("Write \"exit\" to stop reading");
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if (line.matches(REGEX_EXIT)) {

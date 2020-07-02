@@ -1,5 +1,7 @@
 package by.halatsevich.string.service;
 
+import by.halatsevich.string.exception.InputDataException;
+
 /**
  * This interface provides methods to replace letters or characters in text
  *
@@ -14,8 +16,9 @@ public interface ReplaceSymbol {
      * @param index  position in a word where need to replace character
      * @param letter replaced character
      * @return text with replaced characters in words
+     * @throws InputDataException if text is null or index is less than 0
      */
-    String replaceLetterByIndex(String text, int index, char letter);
+    String replaceLetterByIndex(String text, int index, char letter) throws InputDataException;
 
     /**
      * This method replaces wrong character if character before wrong matches the passed character
@@ -25,8 +28,10 @@ public interface ReplaceSymbol {
      * @param wrongLetter       wrong character which need to replace
      * @param rightLetter       replaced right character
      * @return text with replaced wrong characters in words
+     * @throws InputDataException if text is null
      */
-    String replaceWrongLetter(String text, char letterBeforeWrong, char wrongLetter, char rightLetter);
+    String replaceWrongLetter(String text, char letterBeforeWrong, char wrongLetter, char rightLetter)
+            throws InputDataException;
 
     /**
      * This method replaces a word with a specific length to substring
@@ -35,6 +40,7 @@ public interface ReplaceSymbol {
      * @param wordLength word length
      * @param substring  replaced substring
      * @return text with replaced words with a specific length to substring
+     * @throws InputDataException if text is null or length of word is less than 0
      */
-    String replaceSubstring(String text, int wordLength, String substring);
+    String replaceSubstring(String text, int wordLength, String substring) throws InputDataException;
 }
