@@ -1,5 +1,10 @@
 package by.halatsevich.string.exception;
 
+/**
+ * Custom exception
+ *
+ * @author Vladislav Halatsevich
+ */
 public class InputDataException extends Exception {
     public InputDataException() {
     }

@@ -1,4 +1,4 @@
-package by.halatsevich.string.parser;
+package by.halatsevich.string.main.parser;
 
 import java.util.ArrayList;
 import java.util.List;

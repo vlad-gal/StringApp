@@ -10,15 +10,23 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-public class StringReader {
+/**
+ * Text reader from file and console
+ *
+ * @author Vladislav Halatsevich
+ */
+public class TextReader {
     private static final InputStream DEFAULT_INPUT = System.in;
     private static final String DEFAULT_PATH = "resources/data/input.txt";
+    private static final String REGEX_EXIT = "exit";
+    private static final String SPACE = " ";
 
     /**
-     * Read all data from file
+     * Read all text from file
      *
      * @param filePath path to exist file
-     * @return array of strings
+     * @return string of data
+     * @throws InputDataException if error occurred while opening file
      */
     public String readStringFromFile(String filePath) throws InputDataException {
         Path path = Paths.get(filePath);
@@ -33,19 +41,18 @@ public class StringReader {
         }
         StringBuilder resultText = new StringBuilder();
         for (String line : data) {
-            resultText.append(line + " ");
+            resultText.append(line).append(SPACE);
         }
         return resultText.toString();
     }
 
     /**
-     * Read all data from console
+     * Read all text from console
      *
      * @param input input stream to be scanned
-     * @return array of strings
-     * @throws InputDataException if size of array is less than 0
+     * @return string of data
      */
-    public String readStringFromConsole(InputStream input) throws InputDataException {
+    public String readStringFromConsole(InputStream input) {
         if (input == null) {
             input = DEFAULT_INPUT;
         }
@@ -53,10 +60,10 @@ public class StringReader {
         StringBuilder resultText = new StringBuilder();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            if (line.matches("exit")) {
+            if (line.matches(REGEX_EXIT)) {
                 break;
             }
-            resultText.append(line).append(" ");
+            resultText.append(line).append(SPACE);
         }
         scanner.close();
         return resultText.toString();
